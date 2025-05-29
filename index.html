@@ -358,7 +358,7 @@
                     欢迎使用 A8YY。在开始使用前，请您了解并同意以下条款：
                 </p>
                 <p>
-                    <strong class="text-blue-400">服务性质：</strong> F8电影网 仅提供视频搜索服务，不直接提供、存储或上传任何视频内容。所有搜索结果均来自第三方公开接口。
+                    <strong class="text-blue-400">服务性质：</strong> A8YY 仅提供视频搜索服务，不直接提供、存储或上传任何视频内容。所有搜索结果均来自第三方公开接口。
                 </p>
                 <p>
                     <strong class="text-blue-400">用户责任：</strong> 用户在使用本站服务时，须遵守相关法律法规，不得利用搜索结果从事侵权行为，如下载、传播未经授权的作品等。
@@ -398,7 +398,7 @@
         "description": "免费在线视频搜索与观看平台",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://libretv.is-an.org/?s={search_term_string}",
+            "target": "https://a8yy.com/?s={search_term_string}",
             "query-input": "required name=search_term_string"
         }
     }
@@ -433,27 +433,31 @@
     <!-- 版本检测脚本 -->
     <script src="js/version-check.js"></script>
     <!-- 禁止F12 -->
-    <script type="text/javascript">
-	// 禁用右键菜单
-	document.addEventListener('contextmenu', (e) => {
-	    e.preventDefault();
-	});
-	
-	// 检测是否按下了 F12 或 Ctrl+Shift+I
-	document.addEventListener('keydown', (e) => {
-	    if (
-	        (e.key === 'F12' || 
-	         (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-	         (e.ctrlKey && e.shiftKey && e.key === 'C') || 
-	         (e.ctrlKey && e.shiftKey && e.key === 'J') || 
-	         (e.ctrlKey && e.shiftKey && e.key === 'K'))
-	    ) {
-	        e.preventDefault();
-	        console.log('禁止打开开发者工具！');
-	        // 可以在这里执行其他操作
-	    }
-	});
-</script>
+    <script>
+        // 检测F12按键
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                window.close();
+                document.body.innerHTML = '<h1>禁止使用开发者工具</h1>';
+            }
+        });
+
+        // 检测窗口大小变化
+        setInterval(function() {
+            const threshold = 150;
+            if (window.outerWidth - window.innerWidth > threshold || 
+                window.outerHeight - window.innerHeight > threshold) {
+                window.close();
+                document.body.innerHTML = '<h1>检测到开发者工具</h1>';
+            }
+        }, 500);
+
+        // 禁用右键菜单
+        document.oncontextmenu = function() {
+            return false;
+        };
+    </script>
     <!-- 添加弹窗和URL搜索参数处理脚本 -->
     <script src="js/index-page.js"></script>
 </body>
